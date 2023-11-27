@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Properties</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Real Estate App</a>
+            <!-- Navigation links -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'properties' %}">Properties</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'agents' %}">Agents</a>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-danger">Logout</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main content -->
+    <div class="container mt-4">
+        <h1>Properties</h1>
+        <!-- Property list -->
+        <div class="row">
+            <div class="col-ml-2">
+                <h3>List of Properties</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Property ID</th>
+                            <th>Property Name</th>
+                            <th>Type</th>
+                            <th>Start Date</th>
+                            <th>Price</th>
+                            <th>Owner</th>
+                            <th>Address</th>
+                            <!-- Add more columns as needed -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample property row -->
+                        {% for p in properties %}
+                        <tr>
+                            <td>{{p.id}}</td>
+                            <td>{{p.property_name}}</td>
+                            <td>{{p.property_type}}</td>
+                            <td>{{p.start_date}}</td>
+                            <td>{{p.price}}</td>
+                            <td>{{p.owner.first_name}} {{p.owner.last_name}}</td>
+                            <td>{{p.location.street_address}}</td>
+                            <!-- Add more columns as needed -->
+                        </tr>
+                        <!-- Iterate through properties and display here -->
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <!-- Property addition form -->
+                <div class="row">
+                    <div class="col-md-12">
+                <h3>Add New Property</h3>
+                <form method="POST" action="{% url 'properties' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="propertyName">Property Name</label>
+                        <input type="text" class="form-control" name="propertyName" id="propertyName" placeholder="Enter Property Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="propertyType">Property Type</label>
+                        <input type="text" class="form-control" id="propertyType" name="propertyType" placeholder="Enter Property Type">
+                    </div>
+                    <div class="form-group">
+                        <label for="propertySelect">Select Location</label>
+                        <select class="form-control" id="propertySelect" name="propertySelect">
+                            <!-- Options populated with available properties -->
+                            {% for p in properties %}
+                            <option value="{{p.location.id}}">{{p.location.street_address}}</option>
+                            <!-- Add more options dynamically from backend -->
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ownerSelect">Select Owner</label>
+                        <select class="form-control" id="ownerSelect" name="ownerSelect">
+                            <!-- Options populated with available properties -->
+                            {% for p in properties %}
+                            <option value="{{p.owner.id}}">{{p.owner.first_name}} {{p.owner.last_name}}</option>
+                            <!-- Add more options dynamically from backend -->
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="StartDate">Start Date</label>
+                        <input type="date" class="form-control" id="StartDate" name="StartDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="propertyPrice">Price</label>
+                        <input type="text" class="form-control" id="propertyPrice" name="propertyPrice" placeholder="Enter Property Price">
+                    </div>
+                    <!-- Add more fields as per the initial information -->
+                    <button type="submit" class="btn btn-primary">Add Property</button>
+                </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

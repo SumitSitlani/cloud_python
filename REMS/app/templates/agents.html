@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Agents</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Real Estate App</a>
+            <!-- Navigation links -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'properties' %}">Properties</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'agents' %}">Agents</a>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-danger">Logout</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main content -->
+    <div class="container mt-4">
+        <h1>Agents</h1>
+        <!-- Agents list and addition form -->
+        <div class="row">
+            <div class="col-md-6">
+                <h3>List of Agents</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Agent ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Contact Number</th>
+                            <th>Email Address</th>
+                            <!-- Add more columns if needed -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample agent row -->
+                        {% for a in agents %}
+                        <tr>
+                            <td>{{a.id}}</td>
+                            <td>{{a.first_name}}</td>
+                            <td>{{a.last_name}}</td>
+                            <td>{{a.contact_number}}</td>
+                            <td>{{a.email}}</td>
+                            <!-- Add more columns if needed -->
+                        </tr>
+                        {% endfor %}
+                        <!-- Iterate through agents and display here -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <!-- Agent addition form -->
+                <h3>Add New Agent</h3>
+                <form method="POST" action="{% url 'agents' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter First Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter Last Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactNumber">Contact Number</label>
+                        <input type="text" class="form-control" id="contactNumber" name="contactNumber" placeholder="Enter Contact Number">
+                    </div>
+                    <div class="form-group">
+                        <label for="emailAddress">Email Address</label>
+                        <input type="email" class="form-control" id="emailAddress" name="emailAddress" placeholder="Enter Email Address">
+                    </div>
+                    <!-- Add more fields as needed -->
+                    <button type="submit" class="btn btn-primary">Add Agent</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

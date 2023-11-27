@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Appointments</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Real Estate App</a>
+            <!-- Navigation links -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="appointments.html">Appointments</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="feedback.html">Feedback</a>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-danger">Logout</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <!-- Main content -->
+    <div class="container mt-4">
+        <h1>Appointments</h1>
+        <!-- View appointments and appointment creation form -->
+        <div class="row">
+            <div class="col-md-6">
+                <h3>List of Appointments</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Appointment ID</th>
+                            <th>Property</th>
+                            <th>Agent</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <!-- Add more columns if needed -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample appointment row -->
+                        <tr>
+                            <td>1</td>
+                            <td>Sample Property</td>
+                            <td>Agent Smith</td>
+                            <td>2023-11-17</td>
+                            <td>09:30 AM</td>
+                            <td>Scheduled</td>
+                            <!-- Add more columns if needed -->
+                        </tr>
+                        <!-- Iterate through appointments and display here -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <!-- Appointment creation form -->
+                <h3>Create New Appointment</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="propertySelect">Select Property</label>
+                        <select class="form-control" id="propertySelect">
+                            <!-- Options populated with available properties -->
+                            <option value="property1">Property 1</option>
+                            <option value="property2">Property 2</option>
+                            <!-- Add more options dynamically from backend -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="agentSelect">Select Agent</label>
+                        <select class="form-control" id="agentSelect">
+                            <!-- Options populated with available agents -->
+                            <option value="agent1">Agent 1</option>
+                            <option value="agent2">Agent 2</option>
+                            <!-- Add more options dynamically from backend -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="appointmentDate">Appointment Date</label>
+                        <input type="date" class="form-control" id="appointmentDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="appointmentTime">Appointment Time</label>
+                        <input type="time" class="form-control" id="appointmentTime">
+                    </div>
+                    <div class="form-group">
+                        <label for="Status">Appointment Status</label>
+                        <select class="form-control" id="statusSelect">
+                            <!-- Options populated with available agents -->
+                            <option value="Scheduled">Scheduled</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Planning">Planning</option>
+                            <option value="Cancelled">Cancelled</option>
+                            <!-- Add more options dynamically from backend -->
+                        </select>
+                    </div>
+                    <!-- Add more fields as needed -->
+                    <button type="submit" class="btn btn-primary">Create Appointment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
