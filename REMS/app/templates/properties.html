@@ -87,8 +87,8 @@
                         <label for="propertySelect">Select Location</label>
                         <select class="form-control" id="propertySelect" name="propertySelect">
                             <!-- Options populated with available properties -->
-                            {% for p in properties %}
-                            <option value="{{p.location.id}}">{{p.location.street_address}}</option>
+                            {% for l in location %}
+                            <option value="{{l.id}}">{{l.street_address}}</option>
                             <!-- Add more options dynamically from backend -->
                             {% endfor %}
                         </select>
@@ -97,8 +97,8 @@
                         <label for="ownerSelect">Select Owner</label>
                         <select class="form-control" id="ownerSelect" name="ownerSelect">
                             <!-- Options populated with available properties -->
-                            {% for p in properties %}
-                            <option value="{{p.owner.id}}">{{p.owner.first_name}} {{p.owner.last_name}}</option>
+                            {% for o in owner %}
+                            <option value="{{o.id}}">{{o.first_name}} {{o.last_name}}</option>
                             <!-- Add more options dynamically from backend -->
                             {% endfor %}
                         </select>
@@ -110,6 +110,10 @@
                     <div class="form-group">
                         <label for="propertyPrice">Price</label>
                         <input type="text" class="form-control" id="propertyPrice" name="propertyPrice" placeholder="Enter Property Price">
+                    </div>
+                    <div class="form-group">
+                        <label for="propertyStatus">Status</label>
+                        <input type="text" class="form-control" id="propertyStatus" name="propertyStatus" placeholder="Enter Property Status">
                     </div>
                     <!-- Add more fields as per the initial information -->
                     <button type="submit" class="btn btn-primary">Add Property</button>
