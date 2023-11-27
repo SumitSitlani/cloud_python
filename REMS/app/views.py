@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Property,Location,Owner,Agent # Import your Property model
+from .models import Property,Location,Owner,Agent,Appointment # Import your Property model
 
 def create_property(request):
     properties = Property.objects.select_related("owner","location").all()
@@ -60,3 +60,36 @@ def agnets(request):
         return redirect('/agents')
     else:
         return render (request, 'agents.html', {'agents': agnets})
+    
+def appointments(request):
+    appointments = Appointment.objects.all()
+    properties = Property.objects.all()
+    agents = Agent.objects.all()
+
+    if request.method == 'POST':
+        property_data = request.POST.get('propertySelect')
+        agent_data = request.POST.get('agentSelect')
+        date = request.POST.get('appointmentDate')
+        time = request.POST.get('appointmentTime')
+        status = request.POST.get('statusSelect')
+
+        agent_instance = Agent.objects.get(id=agent_data)
+        property_instance = Property.objects.get(id=property_data)
+
+        # Fetch the location associated with the selected property
+        location_instance = property_instance.location  # Assuming property_instance has a 'location' field pointing to Location model
+        
+        new_appoint = Appointment.objects.create(
+            property=property_instance,
+            agent=agent_instance,
+            location=location_instance,  # Assigning the Location instance to the appointment
+            date=date,
+            time=time,
+            status=status
+        )
+
+        new_appoint.save()
+
+        return redirect('/appointments')
+    else:
+        return render(request, 'appointments.html', {'property': properties, 'agents': agents, 'appoint': appointments})
