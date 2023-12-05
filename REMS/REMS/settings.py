@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'REMS.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'app',
+        'NAME': 'app1',
         'USER': 'root',
         'PASSWORD': 'password',
         'HOST': 'localhost',

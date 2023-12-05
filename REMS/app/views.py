@@ -1,6 +1,27 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Property,Location,Owner,Agent,Appointment # Import your Property model
+from .models import Property,Location,Owner,Agent,Appointment,Feedback,Authentication # Import your Property model
+
+def home(request):
+    if request.method == 'POST':
+        fname = request.POST.get('firstName')
+        lname = request.POST.get('lastName')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        #print(fname,lname,email,password)
+        new_user = Authentication.objects.create(
+            fname = fname,
+            lname = lname,
+            email = email,
+            password = password
+        )
+        new_user.save()
+        return redirect('/')
+    else:
+        return render(request, 'index.html')
+    
+def login(request):
+    return render(request, 'login.html')
 
 def create_property(request):
     properties = Property.objects.select_related("owner","location").all()
@@ -93,3 +114,23 @@ def appointments(request):
         return redirect('/appointments')
     else:
         return render(request, 'appointments.html', {'property': properties, 'agents': agents, 'appoint': appointments})
+
+def feedback(request):
+    feedback = Feedback.objects.all()
+    if request.method == 'POST':
+        appointment = request.POST.get('appointmentID')
+        comments = request.POST.get('feedbackComments')
+        rating = request.POST.get('feedbackRating')
+        feedback_date = request.POST.get('feedbackDate')
+        appoint_instance = Appointment.objects.get(id=appointment)
+        #print(appoint,comment,rating,date)
+        new_feedback = Feedback.objects.create(
+            appointment = appoint_instance,
+            comments = comments,
+            rating = rating,
+            feedback_date = feedback_date
+        )
+        new_feedback.save()
+        return redirect('/feedback')
+    else:
+        return render(request, 'feedback.html',{'feedback': feedback})

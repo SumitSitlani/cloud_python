@@ -63,4 +63,13 @@ class Feedback(models.Model):
 
     def __str__(self):
         return f"Feedback for {self.appointment.property.property_name} by {self.appointment.agent.first_name}"
-
+    
+class Authentication(models.Model):
+    fname = models.TextField()
+    lname = models.TextField()
+    email = models.TextField()
+    password = models.TextField()
+    type = models.TextField(default='user')
+    
+    def __str__(self):
+        return self.email

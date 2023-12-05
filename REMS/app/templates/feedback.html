@@ -17,10 +17,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.html">Home</a>
                 <li class="nav-item">
-                    <a class="nav-link" href="appointments.html">Appointments</a>
+                    <a class="nav-link" href="{% url 'appointments' %}">Appointments</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="feedback.html">Feedback</a>
+                    <a class="nav-link" href="{% url 'feedback' %}">Feedback</a>
                 </li>
                 <li class="nav-item ">
                     <button class="btn btn-danger">Logout</button>
@@ -49,37 +49,40 @@
                     </thead>
                     <tbody>
                         <!-- Sample feedback row -->
+                        {% for f in feedback %}
                         <tr>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>Great property!</td>
-                            <td>5/5</td>
-                            <td>2023-11-17</td>
+                            <td>{{f.id}}</td>
+                            <td>{{f.appointment}}</td>
+                            <td>{{f.comments}}</td>
+                            <td>{{f.rating}}/5</td>
+                            <td>{{f.feedback_date}}</td>
                             <!-- Add more columns if needed -->
                         </tr>
                         <!-- Iterate through feedback and display here -->
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
             <div class="col-md-6">
                 <!-- Feedback submission form -->
                 <h3>Leave Feedback</h3>
-                <form>
+                <form method="POST" action="{% url 'feedback' %}">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="appointmentID">Appointment ID</label>
-                        <input type="text" class="form-control" id="appointmentID" placeholder="Enter Appointment ID">
+                        <input type="text" class="form-control" id="appointmentID" name="appointmentID" placeholder="Enter Appointment ID">
                     </div>
                     <div class="form-group">
                         <label for="feedbackComments">Comments</label>
-                        <textarea class="form-control" id="feedbackComments" rows="3" placeholder="Enter Comments"></textarea>
+                        <textarea class="form-control" id="feedbackComments" name="feedbackComments" rows="3" placeholder="Enter Comments"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="feedbackRating">Rating</label>
-                        <input type="number" class="form-control" id="feedbackRating" min="1" max="5" placeholder="Enter Rating">
+                        <input type="number" class="form-control" id="feedbackRating" name="feedbackRating" min="1" max="5" placeholder="Enter Rating">
                     </div>
                     <div class="form-group">
                         <label for="feedbackDate">Feedback Date</label>
-                        <input type="date" class="form-control" id="feedbackDate">
+                        <input type="date" class="form-control" id="feedbackDate" name="feedbackDate">
                     </div>
                     <!-- Add more fields as needed -->
                     <button type="submit" class="btn btn-primary">Submit Feedback</button>

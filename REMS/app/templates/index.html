@@ -15,7 +15,7 @@
             <!-- Navigation links -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="login.html"><button class="btn btn-success"> Login</button></a>
+                    <a href="{% url 'login' %}"><button class="btn btn-success"> Login</button></a>
                 </li>
             </ul>
         </nav>
@@ -27,22 +27,23 @@
         <!-- Registration form -->
         <div class="row">
             <div class="col-md-6">
-                <form>
+                <form method="POST" action="{% url 'index' %}">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="Enter First Name">
+                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter First Name">
                     </div>
                     <div class="form-group">
                         <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name">
+                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter Last Name">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter Email">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Enter Password">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
                     </div>
                     <button type="submit" class="btn btn-primary">Register</button>
                 </form>
